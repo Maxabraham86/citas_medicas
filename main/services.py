@@ -3,7 +3,7 @@ from main.models import UserProfile
 
 
 
-def crear_user(request,username, first_name, email, password, pass_confirm):
+def crear_user(username, email, password, pass_confirm):
         #validamos que el password coincida
     if password !=pass_confirm:
         return False, 'las contraseñas no coinciden'
@@ -12,8 +12,6 @@ def crear_user(request,username, first_name, email, password, pass_confirm):
     try:
         user = User.objects.create_user(
             username= username,
-            first_name = first_name,
-            
             email= email,
             password=  password,
     )

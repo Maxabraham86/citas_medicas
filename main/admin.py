@@ -1,5 +1,8 @@
 from django.contrib import admin
+from main.models import Contacto
 
 # Register your models here.
-class ComunaAdmin(admin.ModelAdmin):
+class ContactoAdmin(admin.ModelAdmin):
     pass
+
+admin.site.register(Contacto, ContactoAdmin)

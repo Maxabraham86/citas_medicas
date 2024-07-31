@@ -1,5 +1,6 @@
 from django import forms
-
+from django.forms import ModelForm
+from main.models import Contacto
 
 class ContactForm(forms.Form):
     nombre = forms.CharField(
@@ -27,3 +28,8 @@ class ContactForm(forms.Form):
             'placeholder': 'Ingrese mensaje. Máximo 500 carácteres'
         })
     )
+    
+class ContactoModelForm(ModelForm):
+    class Meta:
+        model= Contacto
+        fields=['nombre', 'email' , 'mensaje']

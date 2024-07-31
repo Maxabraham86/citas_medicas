@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Contacto(models.Model):
     nombre= models.CharField(max_length=255)
-    email = models.EmailField()
+    email = models.EmailField(max_length=255)
     mensaje = models.TextField(max_length=3000)
     
     def __str__(self):
