@@ -1,52 +1,62 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="col-6 offset-3 ">
-    <h3 class="text-center">Registra tu usuario</h3>
-    <form action="{% url 'registro'%}" method="post">
-        {% csrf_token %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 col-12">
+            <h3 class="text-center">Registra tu usuario</h3>
+            <form action="{% url 'registro'%}" method="post">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label class="form-label">Email:</label>
+                    <input
+                        id=""
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        placeholder=""
+                        value="{{ email | default:'' }}"
+                        required
+                    >
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese contraseña:</label>
+                    <input
+                        id=""
+                        type="password"
+                        class="form-control"
+                        name="password"
+                        placeholder=""
+                        value="{{ password | default:'' }}"
+                        required
+                    >
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Repita contraseña:</label>
+                    <input
+                        id=""
+                        type="password"
+                        class="form-control"
+                        name="pass_confirm"
+                        placeholder=""
+                        value="{{ pass_confirm | default:'' }}"
+                        required
+                    >
+                </div>
         
-        <div class="mb-3">
-            <label class="form-label">Email:</label>
-            <input
-                id=""
-                type="email"
-                class="form-control"
-                name="email"
-                placeholder=""
-                value="{{ email | default:'' }}"
-                required
-            >
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Ingrese contraseña:</label>
-            <input
-                id=""
-                type="password"
-                class="form-control"
-                name="password"
-                placeholder=""
-                value="{{ password | default:'' }}"
-                required
-            >
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Repita contraseña:</label>
-            <input
-                id=""
-                type="password"
-                class="form-control"
-                name="pass_confirm"
-                placeholder=""
-                value="{{ pass_confirm | default:'' }}"
-                required
-            >
+        
+        
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
         </div>
 
 
 
-        <button type="submit" class="btn btn-primary">Guardar</button>
-    </form>
+    </div>
+    
+
 </div>
+
 
 {% endblock %}

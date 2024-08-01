@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'agendas',
 ]
 
 MIDDLEWARE = [
@@ -134,5 +135,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/agendas'
 LOGOUT_REDIRECT_URL = '/accounts/login'

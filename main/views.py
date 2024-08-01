@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group
 from django.views import View
@@ -6,7 +7,7 @@ from django.contrib import messages
 from main.forms import ContactForm
 from main.services import crear_user
 from main.models import Contacto
-from main.forms import ContactoModelForm
+from main.forms import ContactoModelForm 
 # Create your views here.
 
 
@@ -25,7 +26,7 @@ class ContactoView(View):
 
     def post(self,request):
         #1. Recuperamos los datos del formulario
-        form = CointactoModelForm(request.POST)
+        form = ContactoModelForm(request.POST)
         #2. Guardamos en la BBDD
         form.save()
         #3. Damos feedback al usuario
@@ -56,10 +57,9 @@ def usuario_no_autentificado(user):
     # retorna un usuario no  autentificado
     return not user.is_authenticated
 
-@user_passes_test(usuario_no_autentificado) # eñ 
+@user_passes_test(usuario_no_autentificado)  
 def register(request):
     if request.method == 'POST':
-        username= request.POST ['email']
         email = request.POST ['email']
         password = request.POST['password']
         pass_confirm = request.POST ['pass_confirm']
@@ -77,11 +77,12 @@ class RegistroView(View):
         #1. recuperamos los datos del formulario
         email=request.POST['email']
         password=request.POST['password']
-        pass_repeat=request.POST['pass_repeat']
+        pass_confirm=request.POST['pass_confirm']
         #2. validamos que contraseñas no se repitan
-        if password != pass_repeat:
+        if password != pass_confirm:
+            print('contraseñas no coinciden')
             messages.error(request,'Contraseñas no coinciden')
-        return redirect('/registro') 
+            return redirect('/registro') 
         #3. Creamos el usuario
         user = User.objects.create_user(username=email, email=email, password=password)
         #4. creamos (si es que no existe el grupo)
@@ -89,5 +90,6 @@ class RegistroView(View):
         #5. le asignamos el grupo al usuario
         user.groups.add(group)
         #6. feedback y redirigimos
-        messages.success('Usuario Creado')
+        messages.success(request,'Usuario Creado')
+        
         return redirect('/')
